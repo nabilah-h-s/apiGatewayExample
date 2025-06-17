@@ -16,6 +16,10 @@ public class CustomGlobalFilter implements GlobalFilter {
         System.out.println("GlobalFilter - Pre-processing");
         System.out.println("Request URI: " + exchange.getRequest().getURI());
         
+        exchange.getRequest().getHeaders().forEach((key, value) ->
+            System.out.println("Request Header: " + key + " = " + value)
+        );
+
         return chain.filter(exchange).then(
             Mono.fromRunnable(() -> {
                 // ✅ Post-processing: Log response headers and status

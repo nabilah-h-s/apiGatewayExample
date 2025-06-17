@@ -11,6 +11,9 @@ spring:
            uri: http://localhost:49031
            predicates:
              - Path=/service-a/**
+           filters:
+             - AddRequestHeader=Authorization, Bearer abc123
+             - AddRequestHeader=X-User-Role, admin
 
          - id: service-b
            uri: http://localhost:49032
