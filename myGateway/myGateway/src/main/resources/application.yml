@@ -1,0 +1,18 @@
+server:
+  port: 49030
+
+spring:
+  application:
+    name = myGateway     
+  cloud:
+    gateway:
+      routes:
+         - id: service-a
+           uri: http://localhost:49031
+           predicates:
+             - Path=/service-a/**
+
+         - id: service-b
+           uri: http://localhost:49032
+           predicates:
+             - Path=/service-b/**
