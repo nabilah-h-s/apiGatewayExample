@@ -10,10 +10,11 @@ spring:
          - id: service-a
            uri: http://localhost:49031
            predicates:
-             - Path=/service-a/**
+             - Path=/old-service-a/**
            filters:
              - AddRequestHeader=Authorization, Bearer abc123
              - AddRequestHeader=X-User-Role, admin
+             - RewritePath=/old-service-a/(?<segment>.*), /service-a/${segment}
 
          - id: service-b
            uri: http://localhost:49032
