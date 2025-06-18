@@ -20,3 +20,5 @@ spring:
            uri: http://localhost:49032
            predicates:
              - Path=/service-b/**
+           filters:
+             - name: AuthGatewayFilter
