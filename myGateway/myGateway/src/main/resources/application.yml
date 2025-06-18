@@ -22,3 +22,5 @@ spring:
              - Path=/service-b/**
            filters:
              - name: AuthGatewayFilter
+               args:
+                 debugMode: Enabled

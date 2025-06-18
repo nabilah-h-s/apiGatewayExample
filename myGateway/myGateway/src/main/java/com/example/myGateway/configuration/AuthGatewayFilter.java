@@ -1,5 +1,6 @@
 package com.example.myGateway.configuration;
 
+import java.util.Objects;
 import java.util.Random;
 
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -16,7 +17,9 @@ public class AuthGatewayFilter extends AbstractGatewayFilterFactory<AuthGatewayF
     }
 
     public static class Config {
-        // Put configuration properties here if needed
+    	private String debugMode;
+        public String getDebugMode() { return debugMode; }
+        public void setDebugMode(String debugMode) { this.debugMode = debugMode; }
     }
 
     @Override
@@ -26,7 +29,10 @@ public class AuthGatewayFilter extends AbstractGatewayFilterFactory<AuthGatewayF
         	System.out.println("Custom filter pre-processing");
         	Random random = new Random();
             int rand = random.nextInt(10);
-
+            // System.out.println(config.getDebugMode());
+            if(Objects.equals(config.getDebugMode(), "Enabled")) {
+            	System.out.println("Random number "+rand);
+            }
            // We can Use our Auth here from Auth Service
 
             if (rand % 2 == 0) {
