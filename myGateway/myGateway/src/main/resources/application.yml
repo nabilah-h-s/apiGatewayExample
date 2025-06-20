@@ -24,3 +24,18 @@ spring:
              - name: AuthGatewayFilter
                args:
                  debugMode: Enabled
+             - name: RequestRateLimiter
+               args:
+                 redis-rate-limiter.replenishRate: 1  # requests per second
+                 redis-rate-limiter.burstCapacity: 1
+                 key-resolver: "#{@ipKeyResolver}"
+  data:
+    redis:
+      host: 10.10.33.248
+      port: 6379
+
+logging:
+  level:
+    org.springframework.cloud.gateway.filter.ratelimit: DEBUG
+
+
