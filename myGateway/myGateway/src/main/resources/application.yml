@@ -3,12 +3,12 @@ server:
 
 spring:
   application:
-    name: myGateway     
+    name = myGateway     
   cloud:
     gateway:
       routes:
          - id: service-a
-           uri: lb://serviceA
+           uri: http://localhost:49031
            predicates:
              - Path=/old-service-a/**
            filters:
@@ -17,15 +17,10 @@ spring:
              - RewritePath=/old-service-a/(?<segment>.*), /service-a/${segment}
 
          - id: service-b
-           uri: lb://serviceB
+           uri: http://localhost:49032
            predicates:
              - Path=/service-b/**
            filters:
              - name: AuthGatewayFilter
                args:
                  debugMode: Enabled
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
