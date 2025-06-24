@@ -20,3 +20,8 @@ spring:
            uri: http://localhost:49032
            predicates:
              - Path=/service-b/**
+           filters:
+             - name: CircuitBreaker
+               args:
+                 name: serviceACircuitBreaker
+                 fallbackUri: forward:/fallback/service-b
