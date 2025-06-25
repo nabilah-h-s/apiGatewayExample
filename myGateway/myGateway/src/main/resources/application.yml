@@ -10,11 +10,10 @@ spring:
          - id: service-a
            uri: http://localhost:49031
            predicates:
-             - Path=/old-service-a/**
+             - Path=/service-a/**
            filters:
              - AddRequestHeader=Authorization, Bearer abc123
              - AddRequestHeader=X-User-Role, admin
-             - RewritePath=/old-service-a/(?<segment>.*), /service-a/${segment}
 
          - id: service-b
            uri: http://localhost:49032
@@ -30,5 +29,14 @@ spring:
            uri: http://localhost:5000
            predicates:
              - Path=/python-service/**
-           filters:
-             - RewritePath=/python-service/(?<segment>.*), /${segment}
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    urls:
+      - name: Service A
+        url: /service-a/v3/api-docs
+      - name: Service B
+        url: /service-b/v3/api-docs
+      - name: Python Service
+        url: /python-service/openapi.json
