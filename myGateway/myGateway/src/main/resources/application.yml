@@ -25,3 +25,10 @@ spring:
                args:
                  name: serviceACircuitBreaker
                  fallbackUri: forward:/fallback/service-b
+
+         - id: python-service
+           uri: http://localhost:5000
+           predicates:
+             - Path=/python-service/**
+           filters:
+             - RewritePath=/python-service/(?<segment>.*), /${segment}
